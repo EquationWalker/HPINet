@@ -1,0 +1,158 @@
+2023-12-06 22:33:10,592 INFO: 
+                ____                _       _____  ____
+               / __ ) ____ _ _____ (_)_____/ ___/ / __ \
+              / __  |/ __ `// ___// // ___/\__ \ / /_/ /
+             / /_/ // /_/ /(__  )/ // /__ ___/ // _, _/
+            /_____/ \__,_//____//_/ \___//____//_/ |_|
+     ______                   __   __                 __      __
+    / ____/____   ____   ____/ /  / /   __  __ _____ / /__   / /
+   / / __ / __ \ / __ \ / __  /  / /   / / / // ___// //_/  / /
+  / /_/ // /_/ // /_/ // /_/ /  / /___/ /_/ // /__ / /<    /_/
+  \____/ \____/ \____/ \____/  /_____/\____/ \___//_/|_|  (_)
+    
+Version Information: 
+	BasicSR: 1.4.2
+	PyTorch: 2.1.1+cu118
+	TorchVision: 0.16.1+cu118
+2023-12-06 22:33:10,592 INFO: 
+  name: test_HPI_M_SR_x2
+  model_type: HPIModel
+  scale: 2
+  num_gpu: 1
+  manual_seed: 3407
+  datasets:[
+    test_1:[
+      name: Set5
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/Set5/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/Set5/LR_bicubic/X2
+      filename_tmpl: {}x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+    test_2:[
+      name: Set14
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/Set14/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/Set14/LR_bicubic/X2
+      filename_tmpl: {}x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+    test_3:[
+      name: B100
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/B100/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/B100/LR_bicubic/X2
+      filename_tmpl: {}x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+    test_4:[
+      name: Urban100
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/Urban100/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/Urban100/LR_bicubic/X2
+      filename_tmpl: {}x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+    test_5:[
+      name: Manga109
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/Manga109/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/Manga109/LR_bicubic/X2
+      filename_tmpl: {}_LRBI_x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+  ]
+  network_g:[
+    type: HPI
+    upscale: 2
+    model_type: M
+  ]
+  path:[
+    pretrain_network_g: /home/liuxin1/HPINet/checkpoints/aa.pth
+    strict_load_g: True
+    results_root: /home/liuxin1/BasicSR/results/test_HPI_M_SR_x2
+    log: /home/liuxin1/BasicSR/results/test_HPI_M_SR_x2
+    visualization: /home/liuxin1/BasicSR/results/test_HPI_M_SR_x2/visualization
+  ]
+  val:[
+    save_img: False
+    suffix: None
+    metrics:[
+      psnr:[
+        type: calculate_psnr
+        crop_border: 2
+        test_y_channel: True
+      ]
+      ssim:[
+        type: calculate_ssim
+        crop_border: 2
+        test_y_channel: True
+      ]
+    ]
+  ]
+  dist: False
+  rank: 0
+  world_size: 1
+  auto_resume: False
+  is_train: False
+
+2023-12-06 22:33:10,592 INFO: Dataset [PairedImageDataset] - Set5 is built.
+2023-12-06 22:33:10,593 INFO: Number of test images in Set5: 5
+2023-12-06 22:33:10,593 INFO: Dataset [PairedImageDataset] - Set14 is built.
+2023-12-06 22:33:10,594 INFO: Number of test images in Set14: 14
+2023-12-06 22:33:10,597 INFO: Dataset [PairedImageDataset] - B100 is built.
+2023-12-06 22:33:10,597 INFO: Number of test images in B100: 100
+2023-12-06 22:33:10,600 INFO: Dataset [PairedImageDataset] - Urban100 is built.
+2023-12-06 22:33:10,600 INFO: Number of test images in Urban100: 100
+2023-12-06 22:33:10,604 INFO: Dataset [PairedImageDataset] - Manga109 is built.
+2023-12-06 22:33:10,604 INFO: Number of test images in Manga109: 109
+2023-12-06 22:33:10,643 INFO: Network [HPI] is created.
+2023-12-06 22:33:12,643 INFO: Network: HPI, with parameters: 782,539
+2023-12-06 22:33:12,643 INFO: #Params of HPI-M: 782.5390 [K]
+2023-12-06 22:33:12,675 INFO: Loading HPI model from /home/liuxin1/HPINet/checkpoints/aa.pth, with param key: [params].
+2023-12-06 22:33:12,774 INFO: Model [HPIModel] is created.
+2023-12-06 22:33:12,774 INFO: Testing Set5...
+2023-12-06 22:33:15,545 INFO: Validation Set5
+	 # psnr: 38.2052	Best: 38.2052 @ test_HPI_M_SR_x2 iter
+	 # ssim: 0.9615	Best: 0.9615 @ test_HPI_M_SR_x2 iter
+
+2023-12-06 22:33:15,548 INFO: Testing Set14...
+2023-12-06 22:33:26,098 INFO: Validation Set14
+	 # psnr: 33.9764	Best: 33.9764 @ test_HPI_M_SR_x2 iter
+	 # ssim: 0.9217	Best: 0.9217 @ test_HPI_M_SR_x2 iter
+
+2023-12-06 22:33:26,102 INFO: Testing B100...
+2023-12-06 22:34:10,801 INFO: Validation B100
+	 # psnr: 32.3387	Best: 32.3387 @ test_HPI_M_SR_x2 iter
+	 # ssim: 0.9022	Best: 0.9022 @ test_HPI_M_SR_x2 iter
+
+2023-12-06 22:34:10,801 INFO: Testing Urban100...
+2023-12-06 22:37:28,845 INFO: Validation Urban100
+	 # psnr: 32.8862	Best: 32.8862 @ test_HPI_M_SR_x2 iter
+	 # ssim: 0.9353	Best: 0.9353 @ test_HPI_M_SR_x2 iter
+
+2023-12-06 22:37:28,845 INFO: Testing Manga109...
+2023-12-06 22:41:36,799 INFO: Validation Manga109
+	 # psnr: 39.1907	Best: 39.1907 @ test_HPI_M_SR_x2 iter
+	 # ssim: 0.9782	Best: 0.9782 @ test_HPI_M_SR_x2 iter
+

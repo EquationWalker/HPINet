@@ -1,0 +1,159 @@
+2023-12-09 12:24:45,872 INFO: 
+                ____                _       _____  ____
+               / __ ) ____ _ _____ (_)_____/ ___/ / __ \
+              / __  |/ __ `// ___// // ___/\__ \ / /_/ /
+             / /_/ // /_/ /(__  )/ // /__ ___/ // _, _/
+            /_____/ \__,_//____//_/ \___//____//_/ |_|
+     ______                   __   __                 __      __
+    / ____/____   ____   ____/ /  / /   __  __ _____ / /__   / /
+   / / __ / __ \ / __ \ / __  /  / /   / / / // ___// //_/  / /
+  / /_/ // /_/ // /_/ // /_/ /  / /___/ /_/ // /__ / /<    /_/
+  \____/ \____/ \____/ \____/  /_____/\____/ \___//_/|_|  (_)
+    
+Version Information: 
+	BasicSR: 1.4.2
+	PyTorch: 2.1.1+cu118
+	TorchVision: 0.16.1+cu118
+2023-12-09 12:24:45,872 INFO: 
+  name: test_HPP_M_upwz_SR_x2
+  model_type: HPIModel
+  scale: 2
+  num_gpu: 1
+  manual_seed: 3407
+  datasets:[
+    test_1:[
+      name: Set5
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/Set5/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/Set5/LR_bicubic/X2
+      filename_tmpl: {}x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+    test_2:[
+      name: Set14
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/Set14/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/Set14/LR_bicubic/X2
+      filename_tmpl: {}x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+    test_3:[
+      name: B100
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/B100/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/B100/LR_bicubic/X2
+      filename_tmpl: {}x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+    test_4:[
+      name: Urban100
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/Urban100/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/Urban100/LR_bicubic/X2
+      filename_tmpl: {}x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+    test_5:[
+      name: Manga109
+      type: PairedImageDataset
+      dataroot_gt: /home/liuxin1/datasets/SR/Manga109/HR
+      dataroot_lq: /home/liuxin1/datasets/SR/Manga109/LR_bicubic/X2
+      filename_tmpl: {}_LRBI_x2
+      io_backend:[
+        type: disk
+      ]
+      phase: test
+      scale: 2
+    ]
+  ]
+  network_g:[
+    type: HPP
+    windows_size: [4, 4, 4, 4, 8, 8, 8, 8]
+    model_type: M
+    upscale: 2
+  ]
+  path:[
+    pretrain_network_g: experiments/HPP_M_upwz_SR_x2/models/net_g_477500.pth
+    strict_load_g: True
+    results_root: /home/liuxin1/BasicSR/results/test_HPP_M_upwz_SR_x2
+    log: /home/liuxin1/BasicSR/results/test_HPP_M_upwz_SR_x2
+    visualization: /home/liuxin1/BasicSR/results/test_HPP_M_upwz_SR_x2/visualization
+  ]
+  val:[
+    save_img: False
+    suffix: None
+    metrics:[
+      psnr:[
+        type: calculate_psnr
+        crop_border: 2
+        test_y_channel: True
+      ]
+      ssim:[
+        type: calculate_ssim
+        crop_border: 2
+        test_y_channel: True
+      ]
+    ]
+  ]
+  dist: False
+  rank: 0
+  world_size: 1
+  auto_resume: False
+  is_train: False
+
+2023-12-09 12:24:45,873 INFO: Dataset [PairedImageDataset] - Set5 is built.
+2023-12-09 12:24:45,873 INFO: Number of test images in Set5: 5
+2023-12-09 12:24:45,874 INFO: Dataset [PairedImageDataset] - Set14 is built.
+2023-12-09 12:24:45,874 INFO: Number of test images in Set14: 14
+2023-12-09 12:24:45,877 INFO: Dataset [PairedImageDataset] - B100 is built.
+2023-12-09 12:24:45,878 INFO: Number of test images in B100: 100
+2023-12-09 12:24:45,881 INFO: Dataset [PairedImageDataset] - Urban100 is built.
+2023-12-09 12:24:45,881 INFO: Number of test images in Urban100: 100
+2023-12-09 12:24:45,885 INFO: Dataset [PairedImageDataset] - Manga109 is built.
+2023-12-09 12:24:45,885 INFO: Number of test images in Manga109: 109
+2023-12-09 12:24:45,925 INFO: Network [HPP] is created.
+2023-12-09 12:24:47,909 INFO: Network: HPP, with parameters: 742,763
+2023-12-09 12:24:47,909 INFO: #Params of HPP-M: 742.7630 [K]
+2023-12-09 12:24:47,940 INFO: Loading HPP model from experiments/HPP_M_upwz_SR_x2/models/net_g_477500.pth, with param key: [params].
+2023-12-09 12:24:48,030 INFO: Model [HPIModel] is created.
+2023-12-09 12:24:48,031 INFO: Testing Set5...
+2023-12-09 12:24:50,338 INFO: Validation Set5
+	 # psnr: 38.0207	Best: 38.0207 @ test_HPP_M_upwz_SR_x2 iter
+	 # ssim: 0.9606	Best: 0.9606 @ test_HPP_M_upwz_SR_x2 iter
+
+2023-12-09 12:24:50,338 INFO: Testing Set14...
+2023-12-09 12:24:57,210 INFO: Validation Set14
+	 # psnr: 33.6632	Best: 33.6632 @ test_HPP_M_upwz_SR_x2 iter
+	 # ssim: 0.9184	Best: 0.9184 @ test_HPP_M_upwz_SR_x2 iter
+
+2023-12-09 12:24:57,214 INFO: Testing B100...
+2023-12-09 12:25:23,100 INFO: Validation B100
+	 # psnr: 32.2026	Best: 32.2026 @ test_HPP_M_upwz_SR_x2 iter
+	 # ssim: 0.9000	Best: 0.9000 @ test_HPP_M_upwz_SR_x2 iter
+
+2023-12-09 12:25:23,100 INFO: Testing Urban100...
+2023-12-09 12:27:27,876 INFO: Validation Urban100
+	 # psnr: 32.2098	Best: 32.2098 @ test_HPP_M_upwz_SR_x2 iter
+	 # ssim: 0.9292	Best: 0.9292 @ test_HPP_M_upwz_SR_x2 iter
+
+2023-12-09 12:27:27,876 INFO: Testing Manga109...
+2023-12-09 12:29:53,351 INFO: Validation Manga109
+	 # psnr: 38.6464	Best: 38.6464 @ test_HPP_M_upwz_SR_x2 iter
+	 # ssim: 0.9772	Best: 0.9772 @ test_HPP_M_upwz_SR_x2 iter
+

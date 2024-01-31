@@ -1,0 +1,81 @@
+# general settings
+name: test_HPP_M_downwz_SR_x2
+model_type: HPIModel
+scale: 2
+num_gpu: 1
+manual_seed: 3407
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: Set5
+    type: PairedImageDataset
+    dataroot_gt: /home/liuxin1/datasets/SR/Set5/HR
+    dataroot_lq: /home/liuxin1/datasets/SR/Set5/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+  test_2:  # the 2nd test dataset
+    name: Set14
+    type: PairedImageDataset
+    dataroot_gt: /home/liuxin1/datasets/SR/Set14/HR
+    dataroot_lq: /home/liuxin1/datasets/SR/Set14/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+  test_3:  # the 3rd test dataset
+    name: B100
+    type: PairedImageDataset
+    dataroot_gt: /home/liuxin1/datasets/SR/B100/HR
+    dataroot_lq: /home/liuxin1/datasets/SR/B100/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+  test_4:  # the 4th test dataset
+    name: Urban100
+    type: PairedImageDataset
+    dataroot_gt: /home/liuxin1/datasets/SR/Urban100/HR
+    dataroot_lq: /home/liuxin1/datasets/SR/Urban100/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+  test_5:  # the 5th test dataset
+    name: Manga109
+    type: PairedImageDataset
+    dataroot_gt: /home/liuxin1/datasets/SR/Manga109/HR
+    dataroot_lq: /home/liuxin1/datasets/SR/Manga109/LR_bicubic/X2
+    filename_tmpl: '{}_LRBI_x2'
+    io_backend:
+      type: disk
+
+
+
+# network structures
+network_g:
+  type: HPP
+  windows_size: [8,8,8,8,4,4,4,4]
+  model_type: 'M'
+  upscale: 2 
+
+# path
+path:
+  pretrain_network_g: experiments/HPP_M_downwz_SR_x2/models/net_g_398000.pth
+  strict_load_g: true
+
+# validation settings
+val:
+  save_img: false
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true
