@@ -230,7 +230,7 @@ class Match(nn.Module):
             y = y.view(b, n, c, h, w)
         return y
 
-# @ARCH_REGISTRY.register()
+@ARCH_REGISTRY.register()
 class HPI(nn.Module):
     """HPINet model for SISR.
     Paper:
